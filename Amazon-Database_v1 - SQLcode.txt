@@ -1,0 +1,83 @@
+// Create users table
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    Birthdate DATE
+);
+
+// Create customers table and initialize values for it and include primary key to use for other tables
+// Customer ratings: 1 (BAD), 2 (OKAY), 3 (GREAT)
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    FOREIGN KEY (CustomerID) REFERENCES Users(UserID),
+    CustomerPhone INT,
+    CustomerEmail VARCHAR(255),
+    CustomerAddress VARCHAR(255),
+    CustomerRating INT
+);
+
+// Create sellers table
+// Customer ratings: 1 (BAD), 2 (OKAY), 3 (GREAT)
+CREATE TABLE Sellers (
+    SellerID INT PRIMARY KEY,
+    FOREIGN KEY (SellerID) REFERENCES Users(UserID),
+    SellerPhone INT,
+    SellerEmail VARCHAR(255),
+    SellerAddress VARCHAR(255),
+    SellerRating INT
+);
+
+// Create products table and initialize values for it including foreign keys to link to data from customers data
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    SellerID INT,
+    FOREIGN KEY (SellerID) REFERENCES Sellers(SellerID),
+    ProductLocation VARCHAR(255),
+    ProductName VARCHAR(255),
+    ProductPrice DECIMAL,
+    ProductCondition VARCHAR(255),
+    ProductQuantity INT,
+    ProductRating VARCHAR(255),
+    ProductDescription VARCHAR(255)
+);
+
+// Insert data into users table
+INSERT INTO Users (Userid, FirstName, LastName, Birthdate) VALUES
+(1, 'John', 'Doe', TO_DATE('1990-05-15', 'YYYY-MM-DD'));
+INSERT INTO Users (Userid, FirstName, LastName, Birthdate) VALUES
+(2, 'Jane', 'Smith', TO_DATE('1985-08-20', 'YYYY-MM-DD'));
+INSERT INTO Users (Userid, FirstName, LastName, Birthdate) VALUES
+(3, 'Bob', 'Johnson', TO_DATE('1995-03-10', 'YYYY-MM-DD'));
+INSERT INTO Users (Userid, FirstName, LastName, Birthdate) VALUES
+(4, 'Adam', 'Peterson', TO_DATE('2004-05-07', 'YYYY-MM-DD'));
+INSERT INTO Users (Userid, FirstName, LastName, Birthdate) VALUES
+(5, 'Hanzla', 'Bin Masood', TO_DATE('1996-03-10', 'YYYY-MM-DD'));
+
+// Insert data into customers table
+INSERT INTO Customers (Customerid, CustomerPhone, CustomerEmail, CustomerAddress, CustomerRating) VALUES
+(1, 1234567890, 'john.doe@email.com', '123 Main St, Cityville', 3);
+INSERT INTO Customers (Customerid, CustomerPhone, CustomerEmail, CustomerAddress, CustomerRating) VALUES
+(2, 9876543210, 'jane.smith@email.com', '456 Oak St, Townsville', 2);
+INSERT INTO Customers (Customerid, CustomerPhone, CustomerEmail, CustomerAddress, CustomerRating) VALUES
+(3, 5556667777, 'bob.johnson@email.com', '789 Pine St, Villagetown', 1);
+INSERT INTO Customers (Customerid, CustomerPhone, CustomerEmail, CustomerAddress, CustomerRating) VALUES
+(4, 6546058465, 'adam.peterson@email.com', '328 Oak Ave, Brookfield', 3);
+INSERT INTO Customers (Customerid, CustomerPhone, CustomerEmail, CustomerAddress, CustomerRating) VALUES
+(5, 8640654032, 'hanzla.binmasood@email.com', '5046 Great St, Oakville', 1);
+
+// Insert data into sellers table
+INSERT INTO Sellers (SellerID, SellerPhone, SellerEmail, SellerAddress, SellerRating) VALUES
+(1, 1112223333, 'seller1@email.com', '789 Elm St, Countryside', 3);
+INSERT INTO Sellers (SellerID, SellerPhone, SellerEmail, SellerAddress, SellerRating) VALUES
+(2, 9998887777, 'seller2@email.com', '101 Maple St, Suburbia', 2);
+INSERT INTO Sellers (SellerID, SellerPhone, SellerEmail, SellerAddress, SellerRating) VALUES
+(3, 4445556666, 'seller3@email.com', '202 Birch St, Riverside', 1);
+
+// Insert data into products table
+INSERT INTO Products (ProductID, SellerID, ProductLocation, ProductName, ProductPrice, ProductCondition, ProductQuantity, ProductRating, ProductDescription) VALUES
+(1, 1, 'Warehouse A', 'Laptop', 899.99, 'New', 10, 'GREAT', 'High-performance laptop for gaming and work');
+INSERT INTO Products (ProductID, SellerID, ProductLocation, ProductName, ProductPrice, ProductCondition, ProductQuantity, ProductRating, ProductDescription) VALUES
+(2, 2, 'Warehouse B', 'Smartphone', 499.99, 'Like New', 15, 'OKAY', 'Latest model with advanced features');
+INSERT INTO Products (ProductID, SellerID, ProductLocation, ProductName, ProductPrice, ProductCondition, ProductQuantity, ProductRating, ProductDescription) VALUES
+(3, 3, 'Warehouse C', 'Camera', 699.99, 'Used', 5, 'BAD', 'Entry-level digital camera with basic features');

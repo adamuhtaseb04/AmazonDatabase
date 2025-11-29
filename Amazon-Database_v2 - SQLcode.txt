@@ -1,0 +1,20 @@
+// Create sales table and initalize values in it
+CREATE TABLE Sales (
+    SaleID INT PRIMARY KEY,
+    CustomerID INT,
+    SellerID INT,
+    ProductID INT,
+    Saledate DATE,
+    Quantity INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (SellerID) REFERENCES Sellers(SellerID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+// Insert data into the sales table
+INSERT INTO Sales (SaleID, CustomerID, SellerID, ProductID, Saledate, Quantity) VALUES
+(1, 1, 1, 1, TO_DATE('2023-01-15', 'YYYY-MM-DD'), 2);
+INSERT INTO Sales (SaleID, CustomerID, SellerID, ProductID, Saledate, Quantity) VALUES
+(2, 2, 2, 2, TO_DATE('2023-02-20', 'YYYY-MM-DD'), 1);
+INSERT INTO Sales (SaleID, CustomerID, SellerID, ProductID, Saledate, Quantity) VALUES
+(3, 3, 3, 3, TO_DATE('2023-03-10', 'YYYY-MM-DD'), 3);
